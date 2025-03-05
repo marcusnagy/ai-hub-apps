@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:largeHeap="true"
         android:allowBackup="true"
@@ -13,6 +14,8 @@
         android:theme="@style/Theme.ChatApp">
         <activity
             android:name="com.quicinc.chatapp.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +24,16 @@
         </activity>
 
         <activity
+            android:name="org.libsdl.app.SDLActivity"
+            android:label="SDL"
+            android:launchMode="singleTask"
+            android:exported="false"
+            >
+
+        </activity>
+        <activity
             android:name="com.quicinc.chatapp.Conversation"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName="com.quicinc.chatapp.MainActivity" >
         </activity>
 

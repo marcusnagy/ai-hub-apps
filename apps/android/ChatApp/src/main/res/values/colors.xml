@@ -10,4 +10,7 @@
     <color name="bot_color">#9A9C27B0</color>
     <color name="user_color">#2196F3</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="gray">#808080</color>
 </resources>

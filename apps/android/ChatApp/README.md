@@ -161,6 +161,21 @@ cd <ai-hub-apps-repo-root>/apps/android/ChatApp/
 
     4. Use browser UI instance to open and run ChatApp
 
+--- 
+
+## Running ChatApp on Android with WhisperKit
+
+- Add the `openai_whisper-x` to the assets folder. This is compiled from the [WhisperKit Android](https://github.com/argmaxinc/WhisperKitAndroid)
+
+- All other files `.so`-files required by the **WhisperKit** should be placed in the location of your QNN-SDK location inside `qairt/<version>/lib/external/`
+
+- Update your `build.gradle` with the path to your local QNN-SDK
+
+    ```code
+    def qnnSDKLocalPath="/opt/qcom/aistack/qairt/2.28.2.241116"
+    ```
+---
+
 ## License
 
 This app is released under the [BSD-3 License](../../../LICENSE) found at the root of this repository.

@@ -1,10 +1,12 @@
 plugins {
     id "com.android.application"
+    id 'org.jetbrains.kotlin.android'
 }
 
 // Path to local QNN SDK.
 // Download QNN SDK from https://qpm.qualcomm.com/#/main/tools/details/qualcomm_ai_engine_direct
-def qnnSDKLocalPath="<Path to local installed QNN SDK root>"
+// UPDATE PATH TO YOU LOCAL QNN SDK
+def qnnSDKLocalPath="/Users/marcus.jonathan/qairt/2.31.0.250130"
 
 // List of model assets
 def models = ["llama3_2_3b"]
@@ -63,6 +65,9 @@ android {
     aaptOptions {
         noCompress "bin", "json"
     }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
 
     preBuild.doFirst {
         // Check if QNN SDK is set correctly
@@ -89,12 +94,15 @@ android {
         copy {
             from qnnSDKLocalPath
 
-            include "**/lib/aarch64-android/libQnnHtp.so"
-            include "**/lib/aarch64-android/libQnnHtpPrepare.so"
-            include "**/lib/aarch64-android/libQnnSystem.so"
-            include "**/lib/aarch64-android/libQnnSaver.so"
+//            include "**/lib/aarch64-android/libQnnHtp.so"
+//            include "**/lib/aarch64-android/libQnnHtpPrepare.so"
+//            include "**/lib/aarch64-android/libQnnSystem.so"
+//            include "**/lib/aarch64-android/libQnnSaver.so"
             include "**/lib/hexagon-v**/unsigned/libQnnHtpV**Skel.so"
-            include "**/lib/aarch64-android/libQnnHtpV**Stub.so"
+//            include "**/lib/aarch64-android/libQnnHtpV**Stub.so"
+            include "**/lib/aarch64-android/**"
+
+            include "**/lib/external/**"
 
             into libsABIDir
             // Copy libraries without directory structure
@@ -110,7 +118,18 @@ dependencies {
     implementation fileTree(include: ["*.jar"], dir: "libs")
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "com.google.android.material:material:1.12.0"
-    implementation "androidx.constraintlayout:constraintlayout:2.2.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.2.1"
+    implementation 'androidx.core:core-ktx:1.15.0'
+
+    // Main TensorFlow Lite library
+    implementation 'org.tensorflow:tensorflow-lite:2.16.1'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.4.4'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.4.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.4.0'
+    implementation 'androidx.compose.ui:ui-android:1.7.8'
+    implementation 'androidx.compose.foundation:foundation-android:1.7.8'
+    implementation 'androidx.compose.material3:material3-android:1.3.1'
+    implementation 'androidx.activity:activity-compose:1.10.1'
 }
 
 if (System.getProperty("user.dir") != project.rootDir.path) {
